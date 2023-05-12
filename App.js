@@ -1,39 +1,52 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-{/* <div id="parent">
-        <div id="child">
-            <h1>Hello from H1 tag</h1>
+
+
+//React Element
+//React.createElement => React Element JS Object => HTMLElement(render)
+const heading = React.createElement("h1", { id: "heading" }, "Namaste React");
+
+//JSX
+//JSX => React.createElement => React Element JS Object => HTMLElement(render)
+const jsxHeading = <h1>Namaste React from JSX</h1>
+
+
+//Components
+//1. class based components => OLD
+//2. function based components => NEW
+
+// const TitleComponent = () => (
+//     <h1 className="title">
+//         Namste React Title
+//     </h1>
+// )
+
+const TitleComponent = function () {
+    return (
+        <h1 className="title">
+            Namste React Title
+        </h1>
+    )
+}
+
+const HeadingComponent = () => (
+    <React.Fragment>
+        <div id="container">
+            <TitleComponent />
+            <h1 className="heading">Namaste React from functional component</h1>
         </div>
-    </div> */}
+        <div id="container-2">
 
-{/* <div id="parent">
-        <div id="child">
-            <h1>Hello from H1 tag</h1>
-            <h2>Hello from H2 tag</h2>
         </div>
-    </div> */}
+    </React.Fragment>
+);
 
-// const parent = React.createElement("div", {
-//     id: "parent"
-// }, React.createElement("div", {
-//     id: "child"
-// }, React.createElement("h1", {}, "Hello from H1 tag")))
+// const functionalComponent1 = () => {
+//     return <h1>Namaste React from functional based component 2</h1>
+// }
 
-
-//How to create two childerm?
-const parent = React.createElement("div", {
-    id: "parent"
-}, React.createElement("div", {
-    id: "children"
-}, [
-    React.createElement("h1", {}, "Hello from H1"),
-    React.createElement("h2", {}, "Hello from H2")
-]))
-
-const heading = React.createElement("h1", {
-    "id": "heading"
-}, "Hello from react!");
-
+//Root
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(parent)
+// root.render(jsxHeading);
+root.render(<HeadingComponent />)
