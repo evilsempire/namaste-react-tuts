@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom";
 import { CDN_URL } from "../utils/constants";
 
 // const RestaurantCard = (props) => {
 const RestaurantCard = (props) => {
 
-    const { name, cuisines, avgRating, costForTwo, deliveryTime, cloudinaryImageId } = props?.resData?.data;
+    const { name, cuisines, avgRating, costForTwo, deliveryTime, cloudinaryImageId, id } = props?.resData?.data;
 
     return (
-        <div className="res-card">
+        <Link to={'/restaurant/' + id} key={id}>
+            <div className="res-card">
             <img
                 className="res-logo"
                 alt="res-logo"
@@ -17,6 +19,7 @@ const RestaurantCard = (props) => {
             <h4>₹{costForTwo / 100} FOR TWO</h4>
             <h4>{deliveryTime} minutes</h4>
         </div>
+        </Link>
     )
 }
 
