@@ -6,37 +6,48 @@ class UserClass extends React.Component {
         super(props);
 
         this.state = {
-            count: 11,
-            count2: 2
+            userInfo: {
+                name: "Loading",
+                location: "Loading"
+            }
         }
+        // console.log("constructor method called!")
 
-        console.log(this.props.name+" Child constructor called!")
     }
 
-    componentDidMount(){
-        console.log(this.props.name+" Child componentDidMount called")
+    async componentDidMount(){
+        // const result = await fetch("https://api.github.com/users/evilsempire");
+
+        // const json = await result.json();
+
+        // this.setState({
+        //     userInfo : json
+        // })
+
+        // this.timer = setInterval(() => {
+        //     console.log("Running set interval in user class")
+        // }, 1000);
+    }
+
+    componentDidUpdate(){
+        //Mounting
+        // console.log("componentDidUpdate called")
+    }
+
+    componentWillUnmount(){
+        // console.log("componentWillUnmount called")
+        // clearInterval(this.timer)
     }
 
     render() {
-
-        console.log(this.props.name+" Child render called!")
-
-
-        const {name, location} = this.props;
-        const {count, count2} = this.state;
+        // console.log("render method called!")
+        // const {name, location} = this.props;
+        const {name, location, login} = this.state.userInfo;
         return (
             <div className="user-card">
-                <h1>Count: {count}</h1>
-                <button onClick={() => {
-                    this.setState({
-                        count: this.state.count + 1
-                    })
-                }} >
-                    Click me
-                </button>
                 <h2>Name: {name}</h2>
                 <h3>Location: {location}</h3>
-                <h3>Contact: @evilsempire</h3>
+                <h3>Contact: @{login}</h3>
             </div>
         )
     }
