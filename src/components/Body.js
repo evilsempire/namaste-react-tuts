@@ -1,4 +1,5 @@
 import resList from "../utils/mockData";
+import useOnlineStatus from "../utils/useOnlineStatus";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { useEffect, useState } from "react"; //named import
@@ -28,6 +29,8 @@ const Body = () => {
         setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
     }
 
+    const onlineStatus = useOnlineStatus();
+
     /** This is not a good option to show loading screen */
     /** Rather you can use shimmer UI. */
     /** Also know as conditional rendering */
@@ -38,6 +41,10 @@ const Body = () => {
     /**
      * You can use ternary operator also instead of conditional rendering
      */
+
+    if(!onlineStatus){
+        return <h2>Oops! You are offline.</h2>
+    }
 
     return listOfRestaurants.length === 0 ? <Shimmer> </Shimmer> : <div className="body">
         <div className="filter">
