@@ -37,7 +37,7 @@ const AppLayout = () => {
     return (
         <div className="app">
             {/* //will have all the components combined */}
-            <HeaderComponent />
+            <HeaderComponent className="drop-shadow"/>
             <Outlet />
         </div>
     )

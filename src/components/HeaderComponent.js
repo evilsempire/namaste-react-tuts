@@ -13,19 +13,19 @@ const HeaderComponent = () => {
     const onlineStatus = useOnlineStatus();
 
     return (
-        <div className="header">
+        <div className="flex justify-between drop-shadow bg-gray-50">
             <div className="logo">
                 {/* logo */}
-                <img src={`${LOGO_URL}`} />
+                <img className='w-24 p-4 m-4' src={`${LOGO_URL}`} />
             </div>
-            <div className="nav-items">
-                <ul>
+            <div className="flex nav-items">
+                <ul className='flex flex-row m-4 p-4 space-x-4 ali'>
                     <li>
-                       Online Status: {onlineStatus ? <img src="https://cdn3.emoji.gg/emojis/5251-online-status.png" width="32px" height="32px"/> :
+                       {onlineStatus ? <img  src="https://cdn3.emoji.gg/emojis/5251-online-status.png" width="32px" height="32px"/> :
                             offline
                         }
                     </li>
-                    <li>
+                    <li className=''>
                         <Link to="/">Home</Link>
                     </li>
                     <li>
@@ -38,9 +38,11 @@ const HeaderComponent = () => {
                         <Link to="/grocery">Grocery</Link>
                     </li>
                     <li>Cart</li>
+                    <li>
                     <button className='login' onClick={() => {
                         btnNameReact === "Login" ? setbtnNameReact("Logout"): setbtnNameReact("Login")
                     }}>{ btnNameReact }</button>
+                    </li>
                  </ul>
             </div>
         </div>
