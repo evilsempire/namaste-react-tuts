@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
@@ -9,6 +9,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error.js";
 import RestaurantMenu from "./components/RestaurantMenu";
+import UserContext from "./utils/UserContext";
 //Components
 //1. class based components => OLD
 //2. function based components => NEW
@@ -34,12 +35,23 @@ import RestaurantMenu from "./components/RestaurantMenu";
 const Grocery = lazy(() => import('./components/Grocery'));
 
 const AppLayout = () => {
+
+    const [userName, setUserName] = useState("");
+
+    useEffect(() => {
+        setUserName("Ashutosh")
+    },[])
+
     return (
-        <div className="app">
-            {/* //will have all the components combined */}
-            <HeaderComponent className="drop-shadow"/>
-            <Outlet />
-        </div>
+        <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
+            <div className="app">
+                {/* //will have all the components combined */}
+                
+                <HeaderComponent className="drop-shadow"/>
+                
+                <Outlet />
+            </div>
+        </UserContext.Provider>
     )
 } 
 

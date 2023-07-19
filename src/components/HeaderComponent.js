@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import {LOGO_URL} from '../utils/constants';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import UserContext from '../utils/UserContext';
 
 
 const HeaderComponent = () => {
@@ -11,6 +12,7 @@ const HeaderComponent = () => {
     let [btnNameReact, setbtnNameReact] = useState("Login")
     
     const onlineStatus = useOnlineStatus();
+    const { loggedInUser } = useContext(UserContext);
 
     return (
         <div className="flex justify-between drop-shadow bg-gray-50">
@@ -21,9 +23,7 @@ const HeaderComponent = () => {
             <div className="flex nav-items">
                 <ul className='flex flex-row m-4 p-4 space-x-4 ali'>
                     <li>
-                       {onlineStatus ? <img  src="https://cdn3.emoji.gg/emojis/5251-online-status.png" width="32px" height="32px"/> :
-                            offline
-                        }
+                       {onlineStatus ? "🟢" : "🔴" }
                     </li>
                     <li className=''>
                         <Link to="/">Home</Link>
@@ -42,6 +42,10 @@ const HeaderComponent = () => {
                     <button className='login' onClick={() => {
                         btnNameReact === "Login" ? setbtnNameReact("Logout"): setbtnNameReact("Login")
                     }}>{ btnNameReact }</button>
+                    </li>
+
+                    <li>
+                        {loggedInUser}
                     </li>
                  </ul>
             </div>

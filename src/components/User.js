@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-
+import UserContext from "../utils/UserContext";
 const User = ({name}) => {
 
     const [count] = useState(0);
@@ -32,6 +32,11 @@ const User = ({name}) => {
             <h2>Name: {name}</h2>
             <h3>Location: Mumbai</h3>
             <h3>Contact: @evilsempire</h3>
+            <UserContext.Consumer>
+              {({loggedInUser}) => <div>
+                 Logged In: {loggedInUser}
+                </div>}
+            </UserContext.Consumer>
         </div>
     )
 }

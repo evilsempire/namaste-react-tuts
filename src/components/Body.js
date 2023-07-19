@@ -1,9 +1,10 @@
+
 import resList from "../utils/mockData";
 import useOnlineStatus from "../utils/useOnlineStatus";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
-import { useEffect, useState } from "react"; //named import
-
+import { useEffect, useState, useContext } from "react"; //named import
+import UserContext from "../utils/UserContext";
 const Body = () => {
 
     //local state variable => maintains the state of the react component
@@ -11,6 +12,10 @@ const Body = () => {
     const [listOfRestaurants, setListOfRestaurant] = useState([]);
     const [filteredRestaurants, setFilteredRestaurant] = useState([])
     const [searchValue, setSearchValue] = useState("");
+
+    const {loggedInUser, setUserName} = useContext(UserContext)
+
+    const PromotedRestaurantCard = withPromotedLabel(RestaurantCard);
 
     useEffect(() => {
 
@@ -24,7 +29,7 @@ const Body = () => {
 
         const json = await data.json();
 
-        console.log(json)
+        console.log(json?.data?.cards[2]?.data?.data?.cards)
         setListOfRestaurant(json?.data?.cards[2]?.data?.data?.cards);
         setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
     }
@@ -76,15 +81,29 @@ const Body = () => {
                 }}>
                 Top Rated Restaurants
             </button>
+
+            <div className="p-2 m-2 rounded">
+                <input  
+                    className="border border-black"
+                    value={loggedInUser}
+                    onChange={(e) => {
+                        setUserName(e.target.value)
+                    }}
+                />
+            </div>
         </div>
         <div className="flex flex-wrap">
             {/* will contain lot restro cards */}
             {
-                filteredRestaurants.map((resObject, index) => <RestaurantCard
+                filteredRestaurants.map((resObject, index) => resObject.data.promoted ? 
+                <PromotedRestaurantCard className="" key={index} resData={resObject}/>
+                :
+                <RestaurantCard
                     className=""
                     key={index}
                     resData={resObject}
-                />)
+                />
+                )
             }
         </div>
     </div>
