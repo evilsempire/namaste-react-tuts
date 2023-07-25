@@ -10,6 +10,9 @@ import Contact from "./components/Contact";
 import Error from "./components/Error.js";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import store from "./utils/Store";
+import Cart from "./components/Cart";
 //Components
 //1. class based components => OLD
 //2. function based components => NEW
@@ -43,15 +46,17 @@ const AppLayout = () => {
     },[])
 
     return (
-        <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
-            <div className="app">
-                {/* //will have all the components combined */}
-                
-                <HeaderComponent className="drop-shadow"/>
-                
-                <Outlet />
-            </div>
-        </UserContext.Provider>
+        <Provider store={store}>
+            <UserContext.Provider value={{loggedInUser: userName, setUserName}}>
+                <div className="app">
+                    {/* //will have all the components combined */}
+                    
+                    <HeaderComponent className="drop-shadow"/>
+                    
+                    <Outlet />
+                </div>
+            </UserContext.Provider>
+        </Provider>
     )
 } 
 
@@ -79,7 +84,12 @@ const appRouter = createBrowserRouter([
             {
                 path: "/restaurant/:resId",
                 element: <RestaurantMenu />
-            }
+            },
+            {
+                path: "/cart",
+                element: <Cart />
+            },
+            
         ],
         errorElement: <Error />
     },

@@ -51,7 +51,7 @@ const Body = () => {
         return <h2>Oops! You are offline.</h2>
     }
 
-    return listOfRestaurants.length === 0 ? <Shimmer> </Shimmer> : <div className="body">
+    return listOfRestaurants && listOfRestaurants.length === 0 ? <Shimmer> </Shimmer> : <div className="body">
         <div className="flex justify-center p-2 m-2">
             <div className="justify-center">
                 <input type="text" className="border-solid border-2 border-gray-200 p-2 m-2 rounded" onChange={(e) => {
