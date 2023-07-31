@@ -24,14 +24,14 @@ const Body = () => {
     }, [])
 
 
-    fetchData = async () => {
+    const fetchData = async () => {
         const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&page_type=DESKTOP_WEB_LISTING");
 
         const json = await data.json();
 
-        console.log(json?.data?.cards[2]?.data?.data?.cards)
-        setListOfRestaurant(json?.data?.cards[2]?.data?.data?.cards);
-        setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+        console.log(json?.data?.cards[2]?.card.card.gridElements.infoWithStyle.restaurants)
+        setListOfRestaurant(json?.data?.cards[2]?.card.card.gridElements.infoWithStyle.restaurants);
+        setFilteredRestaurant(json?.data?.cards[2]?.card.card.gridElements.infoWithStyle.restaurants);
     }
 
     const onlineStatus = useOnlineStatus();
@@ -51,20 +51,19 @@ const Body = () => {
         return <h2>Oops! You are offline.</h2>
     }
 
-    return listOfRestaurants && listOfRestaurants.length === 0 ? <Shimmer> </Shimmer> : <div className="body">
+    return listOfRestaurants && listOfRestaurants.length === 0 ? <Shimmer> </Shimmer> : <div className="body" >
         <div className="flex justify-center p-2 m-2">
             <div className="justify-center">
-                <input type="text" className="border-solid border-2 border-gray-200 p-2 m-2 rounded" onChange={(e) => {
+                <input data-testId="input" type="text" className="border-solid border-2 border-gray-200 p-2 m-2 rounded" onChange={(e) => {
                     setSearchValue(e.target.value);
                 }}/>
                 <button 
-                    className="p-2 m-2 rounded bg-slate-200 text-gray-500" 
+                    className="p-2 m-2 rounded bg-slate-200 text-gray-500"
+                    data-testId="search-btn"
                     onClick={() => {
                     //filter the restaurant card and update the filter
-
-                    console.log(searchValue);
                     const filteredList = listOfRestaurants.filter(
-                        res => res.data.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
+                        res => res.info.name.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase())
                     )
                     setFilteredRestaurant(filteredList)
 
@@ -92,10 +91,10 @@ const Body = () => {
                 />
             </div>
         </div>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap" data-testId="res-list">
             {/* will contain lot restro cards */}
             {
-                filteredRestaurants.map((resObject, index) => resObject.data.promoted ? 
+                filteredRestaurants.map((resObject, index) => resObject?.data?.promoted ? 
                 <PromotedRestaurantCard className="" key={index} resData={resObject}/>
                 :
                 <RestaurantCard

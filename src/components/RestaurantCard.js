@@ -6,7 +6,7 @@ import UserContext from "../utils/UserContext";
 // const RestaurantCard = (props) => {
 const RestaurantCard = (props) => {
 
-    const { name, cuisines, avgRating, costForTwo, deliveryTime, cloudinaryImageId, id } = props?.resData?.data;
+    const { name, cuisines, avgRating, costForTwo, deliveryTime, cloudinaryImageId, id } = props?.resData?.info;
 
     const {loggedInUser} = useContext(UserContext);
 
@@ -24,7 +24,9 @@ const RestaurantCard = (props) => {
                 <div className="flex space-x-5 py-1">
                     <h4 className="text-sm">{avgRating} ★</h4>
                     <h4 className="text-sm">{deliveryTime} MINS</h4>
-                    <h4 className="text-sm">₹{costForTwo / 100} FOR TWO</h4>
+                    {/* <h4 className="text-sm">₹{costForTwo / 100} FOR TWO</h4> */}
+                    <h4 className="text-sm">{costForTwo}</h4>
+
                 </div>
                 <div>logged in: {loggedInUser}</div>
             </div>

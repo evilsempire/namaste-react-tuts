@@ -26,7 +26,7 @@ const RestaurantMenu = () => {
     // }
 
      if(resInfo === null) return <Shimmer />;
-    const {name, cuisines, cloudinaryImageId,costForTwoMessage} = resInfo?.data?.cards[0]?.card?.card?.info;
+    const {name, cuisines, cloudinaryImageId,costForTwo} = resInfo?.data?.cards[0]?.card?.card?.info;
 
     const {itemCards} = resInfo.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[2].card.card;
 
@@ -43,7 +43,7 @@ const RestaurantMenu = () => {
             <div className="text-center">
                 <h1 className="my-5 font-bold text-2xl">{name}</h1>
                 <h3 className="from-neutral-400 text-sm">{cuisines.join(", ")}</h3>
-                <h3>{costForTwoMessage}</h3>
+                <h3>{costForTwo}</h3>
                 {/* <ul>
                     {itemCards.map((item, index) => <li key={index}>{item.card.info.name} - Rs {Math.floor(item.card.info.price/100)}</li>)}
                     

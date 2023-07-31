@@ -19,13 +19,13 @@ const HeaderComponent = () => {
 
     return (
         <div className="flex justify-between drop-shadow bg-gray-50">
-            <div className="logo">
+            <div className="logo" >
                 {/* logo */}
-                <img className='w-24 p-4 m-4' src={`${LOGO_URL}`} />
+                <img data-testid="logo" className='w-24 p-4 m-4' src={`${LOGO_URL}`} />
             </div>
             <div className="flex nav-items">
                 <ul className='flex flex-row m-4 p-4 space-x-4 ali'>
-                    <li>
+                    <li data-testid="online-status" >
                        {onlineStatus ? "🟢" : "🔴" }
                     </li>
                     <li className=''>
@@ -41,8 +41,8 @@ const HeaderComponent = () => {
                         <Link to="/grocery">Grocery</Link>
                     </li>
                     <li>
-                        <Link to="/cart">
-                            Cart - <span className='font-semibold'> ({cartItems.length} Items)</span>
+                        <Link to="/cart" >
+                            Cart - <span className='font-semibold' data-testId="cart"> ({cartItems.length} Items)</span>
                         </Link>
                     </li>
                     <li>

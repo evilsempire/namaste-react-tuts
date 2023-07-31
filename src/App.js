@@ -11,7 +11,7 @@ import Error from "./components/Error.js";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";
-import store from "./utils/Store";
+import store from "./utils/store";
 import Cart from "./components/Cart";
 //Components
 //1. class based components => OLD
