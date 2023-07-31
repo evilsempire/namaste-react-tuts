@@ -29,9 +29,9 @@ const Body = () => {
 
         const json = await data.json();
 
-        console.log(json?.data?.cards[2]?.data?.data?.cards)
-        setListOfRestaurant(json?.data?.cards[2]?.data?.data?.cards);
-        setFilteredRestaurant(json?.data?.cards[2]?.data?.data?.cards);
+        console.log(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+        setListOfRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
 
     const onlineStatus = useOnlineStatus();
@@ -95,7 +95,7 @@ const Body = () => {
         <div className="flex flex-wrap">
             {/* will contain lot restro cards */}
             {
-                filteredRestaurants.map((resObject, index) => resObject.data.promoted ? 
+                filteredRestaurants.map((resObject, index) => resObject.data?.promoted ? 
                 <PromotedRestaurantCard className="" key={index} resData={resObject}/>
                 :
                 <RestaurantCard
